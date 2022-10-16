@@ -1,0 +1,61 @@
+﻿@using EMarketApp.Core.Application.ViewModels
+@model List<EMarketApp.Core.Application.ViewModels.AdViewModel>
+@{
+    ViewData["Title"] = "Home";
+}
+
+@if (Model != null && Model.Count != 0)
+{
+    <form method="POST" asp-controller="Home" asp-action="Index" class="position-absolute py-5 mt-4 top-0 end-0 custom">
+            <select class="mt-2 me-2" id="checkboxes-select" multiple name="CategoryId" placeholder="Filter by category"
+              data-search="false" data-silent-initial-value-set="true" aria-describedby="button">
+                @foreach (var category in ViewBag.CategoriesList)
+                {
+                    <option onChange="this.form.submit()" value="@category.Id">@category.Name</option>
+                }
+            </select>
+
+            <button class="btn-sm btn-primary mt-2" type="submit" id="button">
+                Filter
+            </button>
+    </form>
+}
+<section class="py-3 text-center container">
+    <div class="row py-lg-5">
+        <div class="col-lg-6 col-md-8 mx-auto">
+            <h1 class="fw-bold">E Market App</h1>
+            <p class="lead text-muted">
+                Here you will find all the ads created by all users in the system,
+                which you can filter by category or by their own name.
+            </p>
+        </div>
+    </div>
+</section>
+
+<div class="row">
+
+    @if(Model == null || Model.Count == 0)
+    {
+        <h1 class="text-center fw-light mb-3 mt-3">Oops :(</h1>
+        <h5 class="text-center lead text-muted">No ads created yet</h5>
+    }else
+    {
+        @foreach(AdViewModel ad in Model)
+        {
+            <div class="col-4 mb-4">
+                <form class="form-details" asp-controller="Home" asp-action="Details" asp-route-id="@ad.Id" method="post">
+                    <div class="card bg-dark shadow-sm text-light send-details">
+                        <img src="@ad.ImagePathOne" class="card-img-top bd-placeholder-img img-custom" alt="pokemon img"/>
+                        <div class="card-body">
+                            <h2 class="card-title text-center fw-bold mb-3">@ad.Name</h2>
+                            <p>@ad.Description</p>
+                            <p><i class="fw-bold mb-0 me-2">Category: </i> @ad.Category</p>
+                            <p><i class="fw-bold mt-0 me-2">Price: </i> US$@ad.Price</p>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        }
+    }
+
+</div>

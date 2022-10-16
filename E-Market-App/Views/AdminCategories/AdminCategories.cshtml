@@ -1,0 +1,54 @@
+﻿@using EMarketApp.Core.Application.ViewModels
+@model List<EMarketApp.Core.Application.ViewModels.CategoryViewModel>
+@{
+    ViewData["Title"] = "Admin Categories";
+}
+
+<section class="py-3 text-center container">
+    <div class="row py-lg-5">
+        <div class="col-lg-6 col-md-8 mx-auto">
+            <h1 class="fw-bold">Categories Manager</h1>
+            <p class="lead text-muted">
+                Here you will be able to see all the categories registered in the system,
+                the number of ads and associated users, among other things.
+            </p>
+            <p>
+                <a asp-controller="AdminCategories" asp-action="Create" class="btn btn-lg btn-primary my-2">Create Category</a>
+            </p>
+        </div>
+    </div>
+</section>
+
+<div class="row">
+
+    @if (Model == null || Model.Count == 0)
+    {
+        <h1 class="text-center fw-light mb-3 mt-5">Oops :(</h1>
+        <h4 class="text-center fw-light text-muted mb-5 pb-5">No category created yet</h4>
+    }
+    else
+    {
+        @foreach (CategoryViewModel category in Model)
+        {
+            <div class="col-4 mb-4">
+                <div class="card bg-dark text-light">
+                    <div class="card-body">
+                        <h5 class="card-title mb-2">@category.Name</h5>
+                        <p>@category.Description</p>
+                        <p><i class="fw-bold mb-0 me-2">Associated ads: </i> 20 ads</p>
+                        <p><i class="fw-bold mt-0 me-2">Associated users: </i> 5 users</p>
+                        <a asp-controller="AdminCategories" asp-action="Delete" asp-route-id="@category.Id" class="btn btn-danger float-end">
+                            <i class='bx bxs-trash'></i>
+                        </a>
+
+                        <a asp-controller="AdminCategories" asp-action="Edit" asp-route-id="@category.Id" class="btn btn-primary float-end me-2">
+                            <i class='bx bxs-edit'></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+
+</div>
+

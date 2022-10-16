@@ -1,0 +1,63 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32901.215
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EMarketApp", "E-Market-App\EMarketApp.csproj", "{B4B20A12-5100-4324-95BF-B86E14ED2541}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Source", "Source", "{EC4D1445-23BD-4534-99AA-C0A729032D56}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{50042905-0C5F-418C-9A99-269427B1A990}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{19BD491F-B7A2-4BD5-BB07-F2CDA37B3DC4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{9F27C20A-1D09-4BC0-B5AA-CBA1DFF78546}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WebApp", "WebApp", "{ECF61108-55B6-47D6-9E03-9B1E491B96F4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EMarketApp.Core.Application", "Application\EMarketApp.Core.Application.csproj", "{A47E4656-0AE1-4AE4-B481-899F75FD33E5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EMarketApp.Infrastructure.Persistence", "Database\EMarketApp.Infrastructure.Persistence.csproj", "{D176387B-C8B8-45D6-802F-A5034892C941}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EMarketApp.Core.Domain", "EMarketApp.Core.Domain\EMarketApp.Core.Domain.csproj", "{67203A72-D922-45F7-85C0-A826CDC76EFE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B4B20A12-5100-4324-95BF-B86E14ED2541}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B4B20A12-5100-4324-95BF-B86E14ED2541}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B4B20A12-5100-4324-95BF-B86E14ED2541}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B4B20A12-5100-4324-95BF-B86E14ED2541}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A47E4656-0AE1-4AE4-B481-899F75FD33E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A47E4656-0AE1-4AE4-B481-899F75FD33E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A47E4656-0AE1-4AE4-B481-899F75FD33E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A47E4656-0AE1-4AE4-B481-899F75FD33E5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D176387B-C8B8-45D6-802F-A5034892C941}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D176387B-C8B8-45D6-802F-A5034892C941}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D176387B-C8B8-45D6-802F-A5034892C941}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D176387B-C8B8-45D6-802F-A5034892C941}.Release|Any CPU.Build.0 = Release|Any CPU
+		{67203A72-D922-45F7-85C0-A826CDC76EFE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{67203A72-D922-45F7-85C0-A826CDC76EFE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{67203A72-D922-45F7-85C0-A826CDC76EFE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{67203A72-D922-45F7-85C0-A826CDC76EFE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{B4B20A12-5100-4324-95BF-B86E14ED2541} = {ECF61108-55B6-47D6-9E03-9B1E491B96F4}
+		{50042905-0C5F-418C-9A99-269427B1A990} = {EC4D1445-23BD-4534-99AA-C0A729032D56}
+		{19BD491F-B7A2-4BD5-BB07-F2CDA37B3DC4} = {EC4D1445-23BD-4534-99AA-C0A729032D56}
+		{9F27C20A-1D09-4BC0-B5AA-CBA1DFF78546} = {EC4D1445-23BD-4534-99AA-C0A729032D56}
+		{ECF61108-55B6-47D6-9E03-9B1E491B96F4} = {9F27C20A-1D09-4BC0-B5AA-CBA1DFF78546}
+		{A47E4656-0AE1-4AE4-B481-899F75FD33E5} = {50042905-0C5F-418C-9A99-269427B1A990}
+		{D176387B-C8B8-45D6-802F-A5034892C941} = {19BD491F-B7A2-4BD5-BB07-F2CDA37B3DC4}
+		{67203A72-D922-45F7-85C0-A826CDC76EFE} = {50042905-0C5F-418C-9A99-269427B1A990}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {43EADE54-1766-4CE1-AE85-996527B7BE59}
+	EndGlobalSection
+EndGlobal

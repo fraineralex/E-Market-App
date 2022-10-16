@@ -1,0 +1,40 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+
+.img-custom {
+    height: 200px;
+}
+
+.custom {
+    display: inline-flex;
+    padding-right: 10px;
+}
+
+.warning-img img {
+    height: 120%;
+    width: 80%;
+    object-fit: cover;
+    border-radius: 6px;
+    margin-right: 10px;
+}
+
+.detail {
+    max-height: 400px;
+
+}

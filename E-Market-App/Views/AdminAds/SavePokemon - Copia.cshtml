@@ -1,0 +1,48 @@
+﻿@model EMarketApp.Core.Application.ViewModels.SavePokemonViewModel
+@{
+    bool editMode = Model.Id == 0 ? false : true;
+    ViewData["Title"] = "Register Pokemon";
+}
+
+<form class="row g-3 needs-validation py-5 mt-2" method="POST" asp-controller="AdminPokemons" asp-action="@(editMode ? "Edit" : "Create")">
+    <div class="col-6 m-md-auto mt-5">
+        <div class="card mb-5">
+            <div class="card-header bg-black text-white">
+                <h4 class="text-center">@(editMode ? $"Editando el pokemon: {Model.Name}" : "Creando un nuevo pokemon")</h4>
+            </div>
+            <div class="card-body">
+                <div class="card-title">
+                    <h4 class="text-center mb-4">Rellene todos los campos a continuación</h4>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Name" class="form-label"><strong>Nombre</strong></label>
+                    <input type="text" class="form-control" asp-for="Name" name="Name" required>
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="ImagePath" class="form-label"><strong>Imagen URL</strong></label>
+                    <input type="text" class="form-control" asp-for="ImagePath" name="ImagePath" required>
+                    <span asp-validation-for="ImagePath" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="RegionId" class="form-label"><strong>Región perteneciente</strong></label>
+                    <select class="form-select" asp-for="RegionId" name="RegionId" required>
+                        <option selected disabled value="">Selecciona una región</option>
+                        <option value="1">Kanto</option>
+                        <option value="2">San Juan</option>
+
+                    </select>
+                    <span asp-validation-for="RegionId" class="text-danger"></span>
+                </div>
+
+                <input type="hidden" asp-for="Id" />
+
+                <button type="submit" class="btn btn-primary float-end mt-2 ms-2">@(editMode ? "Actualizar" : "Registrar")</button>
+                <a asp-controller="AdminPokemons" asp-action="Index" class="btn btn-dark float-end mt-2">Regresar</a>
+            </div>
+        </div>
+    </div>
+</form>

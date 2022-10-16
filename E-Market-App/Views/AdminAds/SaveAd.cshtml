@@ -1,0 +1,72 @@
+﻿@model EMarketApp.Core.Application.ViewModels.SaveAdViewModel
+@{
+    bool editMode = Model.Id == 0 ? false : true;
+    ViewData["Title"] = "Create Ad";
+}
+
+@if(Model.CategoriesList.Count == 0)
+{
+    <h1 class="text-center fw-light mb-3 mt-5 pb-5">Oops :(</h1>
+    <h4 class="text-center fw-light text-muted mb-5">You must create at least one category</h4>
+}
+else 
+{
+    <form class="row g-3 needs-validation py-5 mt-2" method="POST" asp-controller="AdminAds" asp-action="@(editMode ? "Edit" : "Create")">
+        <div class="col-6 m-md-auto mt-5">
+            <div class="card mb-5">
+                <div class="card-header bg-black text-white">
+                    <h4 class="text-center">@(
+                            editMode ? $"Editing the ad: {Model.Name}" : "Creating a new ad"
+                    )</h4>
+                </div>
+                <div class="card-body">
+                    <div class="card-title">
+                        <h4 class="text-center mb-4">Fill in all the fields below </h4>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Name" class="form-label"><strong>Name</strong></label>
+                        <input type="text" class="form-control" asp-for="Name" name="Name" required>
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="ImagePathOne" class="form-label"><strong>Image URL</strong></label>
+                        <input type="text" class="form-control" asp-for="ImagePathOne" name="ImagePathOne" required>
+                        <span asp-validation-for="ImagePathOne" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Price" class="form-label"><strong>Price</strong></label>
+                        <input type="number" class="form-control" asp-for="Price" name="Price" required>
+                        <span asp-validation-for="Price" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Description" class="form-label"><strong>Description</strong></label>
+                        <textarea type="text" class="form-control" asp-for="Description" rows="4" name="Description" required></textarea>
+                        <span asp-validation-for="Description" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="CategoryId" class="form-label"><strong>Category</strong></label>
+                        <select class="form-select" asp-for="CategoryId" required>
+                            @foreach (var category in Model.CategoriesList)
+                            {
+                                <option value="@category.Id">@category.Name</option>
+                            }
+                        </select>
+                        <span asp-validation-for="CategoryId" class="text-danger"></span>
+                    </div>
+
+                    <input type="hidden" asp-for="Id" />
+
+                    <button type="submit" class="btn btn-primary float-end mt-2 ms-2">@(
+                    editMode ? "Actualizar" : "Registrar"
+                    )</button>
+                    <a asp-controller="AdminAds" asp-action="Index" class="btn btn-dark float-end mt-2">Regresar</a>
+                </div>
+            </div>
+        </div>
+    </form>
+}

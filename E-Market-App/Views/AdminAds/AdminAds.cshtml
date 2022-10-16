@@ -1,0 +1,56 @@
+﻿@using EMarketApp.Core.Application.ViewModels
+@model List<EMarketApp.Core.Application.ViewModels.AdViewModel>
+@{
+    ViewData["Title"] = "Admin My Ads";
+}
+
+<section class="py-3 text-center container">
+    <div class="row py-lg-5">
+        <div class="col-lg-6 col-md-8 mx-auto">
+            <h1 class="fw-bold">Ads Manager</h1>
+            <p class="lead text-muted">
+                Here you can view all your created ads, its categories and
+                you can create your own ads, edit or delete existing ones.
+            </p>
+            <p>
+                <a asp-controller="AdminAds" asp-action="Create" class="btn btn-lg btn-primary my-2">Create Ad</a>
+            </p>
+        </div>
+    </div>
+</section>
+
+<div class="row">
+
+    @if (Model == null || Model.Count == 0)
+    {
+        <h1 class="text-center fw-light mb-3 mt-3">Oops :(</h1>
+        <h5 class="text-center lead text-muted">No ad created yet</h5>
+    }
+    else
+    {
+        @foreach (AdViewModel ad in Model)
+        {
+            <div class="col-4 mb-4">
+                <div class="card bg-dark shadow text-light">
+                    <img src="@ad.ImagePathOne" class="card-img-top bd-placeholder-img img-custom" alt="img" />
+                    <div class="card-body">
+                        <h2 class="card-title text-center fw-bold mb-3">@ad.Name</h2>
+                        <p>@ad.Description</p>
+                        <p><i class="fw-bold mb-0 me-2">Category: </i> @ad.Category</p>
+                        <p><i class="fw-bold mt-0 me-2">Price: </i> US$@ad.Price</p>
+
+                        <a asp-controller="AdminAds" asp-action="Delete" asp-route-id="@ad.Id" class="btn btn-danger float-end">
+                            <i class='bx bxs-trash'></i>
+                        </a>
+
+                        <a asp-controller="AdminAds" asp-action="Edit" asp-route-id="@ad.Id" class="btn btn-primary float-end me-2">
+                            <i class='bx bxs-edit'></i>
+                        </a>
+
+                    </div>
+                </div>
+            </div>
+        }
+    }
+
+</div>
