@@ -12,6 +12,7 @@ namespace EMarketApp.Core.Application
             #region services
             services.AddTransient<IAdsService, AdService>();
             services.AddTransient<ICategoryService, CategoryService>();
+            services.AddTransient<IUsersService, UserService>();
             #endregion
         }
     }

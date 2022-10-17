@@ -40,7 +40,7 @@ namespace Pokedex_App.Controllers
         public async Task<IActionResult> Edit(int id)
         {
             ViewBag.Page = "adminCategories";
-            return View("SaveCategory", await _categoryService.GetByIdSaveViewModel(id));
+            return View("SaveCategory", await _categoryService.GetSaveViewModelById(id));
         }
 
         [HttpPost]
@@ -57,7 +57,7 @@ namespace Pokedex_App.Controllers
         public async Task<IActionResult> Delete(int id)
         {
             ViewBag.Page = "adminCategories";
-            return View("DeleteCategory", await _categoryService.GetByIdSaveViewModel(id));
+            return View("DeleteCategory", await _categoryService.GetSaveViewModelById(id));
         }
 
         [HttpPost]

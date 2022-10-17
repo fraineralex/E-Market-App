@@ -49,25 +49,6 @@ namespace EMarketApp.Core.Application.Services
             await _adRepository.AddAsync(ad);
         }
 
-        public async Task<SaveAdViewModel> GetByIdSaveViewModel(int id)
-        {
-            var ad = await GetSaveViewModelById(id);
-
-            SaveAdViewModel vm = new();
-            vm.Id = ad.Id;
-            vm.Name = ad.Name;
-            vm.ImagePathOne = ad.ImagePathOne;
-            vm.ImagePathTwo = ad.ImagePathTwo;
-            vm.ImagePathThree = ad.ImagePathThree;
-            vm.ImagePathFour = ad.ImagePathFour;
-            vm.Price = ad.Price;
-            vm.Description = ad.Description;
-            vm.CategoryId = ad.CategoryId;
-            vm.CategoriesList = await _categoryService.GetAllViewModel();
-
-            return vm;
-        }
-
         public async Task Update(SaveAdViewModel vm)
         {
             Ads ad = new();

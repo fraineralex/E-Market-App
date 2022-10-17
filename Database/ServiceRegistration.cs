@@ -34,6 +34,7 @@ namespace EMarketApp.Infrastructure.Persistence
             services.AddTransient(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             services.AddTransient<IAdsRepository, AdRepository>();
             services.AddTransient<ICategoriesRepository, CategoryRepository>();
+            services.AddTransient<IUsersRepository, UserRepository>();
             #endregion
         }
     }

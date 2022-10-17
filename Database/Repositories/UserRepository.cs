@@ -5,11 +5,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace EMarketApp.Infrastructure.Persistence.Repositories
 {
-    public class AdRepository : GenericRepository<Ads>, IAdsRepository
+    public class UserRepository : GenericRepository<Users>, IUsersRepository
     {
         private readonly ApplicationContext _dbContext;
 
-        public AdRepository(ApplicationContext dbContext) : base(dbContext)
+        public UserRepository(ApplicationContext dbContext) : base(dbContext)
         {
             _dbContext = dbContext;
         }

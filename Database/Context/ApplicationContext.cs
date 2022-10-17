@@ -57,12 +57,6 @@ namespace EMarketApp.Infrastructure.Persistence.Context
                  .HasForeignKey(ad => ad.UserId)
                  .OnDelete(DeleteBehavior.Cascade);
 
-          modelBuilder.Entity<Users>()
-                 .HasMany(user => user.Categories)
-                 .WithOne(category => category.Users)
-                 .HasForeignKey(category => category.UserId)
-                 .OnDelete(DeleteBehavior.Cascade);
-
           modelBuilder.Entity<Categories>()
                 .HasMany(category => category.Ads)
                 .WithOne(ad => ad.Categories)
@@ -137,7 +131,7 @@ namespace EMarketApp.Infrastructure.Persistence.Context
                 .HasMaxLength(20);
 
             modelBuilder.Entity<Users>()
-                .Property(user => user.User)
+                .Property(user => user.Username)
                 .IsRequired()
                 .HasMaxLength(50);
 

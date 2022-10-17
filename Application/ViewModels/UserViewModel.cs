@@ -1,9 +1,7 @@
 ﻿
-using EMarketApp.Core.Domain.Common;
-
-namespace EMarketApp.Core.Domain.Entities
+namespace EMarketApp.Core.Application.ViewModels
 {
-    public class Users
+    public class UserViewModel
     {
         public int Id { get; set; }
         public string? Name { get; set; }
@@ -12,9 +10,5 @@ namespace EMarketApp.Core.Domain.Entities
         public string? Phone { get; set; }
         public string? Username { get; set; }
         public string? Password { get; set; }
-
-        //Navigation property
-        public ICollection<Ads> Ads { get; set; }
-        public ICollection<Categories> Categories { get; set; }
     }
 }

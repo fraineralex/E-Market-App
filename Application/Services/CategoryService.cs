@@ -35,18 +35,6 @@ namespace EMarketApp.Core.Application.Services
             await _categoryRepository.AddAsync(category);
         }
 
-        public async Task<SaveCategoryViewModel> GetByIdSaveViewModel(int id)
-        {
-            var category = await _categoryRepository.GetByIdAsync(id);
-
-            SaveCategoryViewModel vm = new();
-            vm.Id = category.Id;
-            vm.Name = category.Name;
-            vm.Description = category.Description;
-
-            return vm;
-        }
-
         public async Task Update(SaveCategoryViewModel vm)
         {
             Categories category = new();
