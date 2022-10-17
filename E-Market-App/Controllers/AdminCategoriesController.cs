@@ -22,7 +22,7 @@ namespace Pokedex_App.Controllers
         public IActionResult Create()
         {
             ViewBag.Page = "adminCategories";
-            return View("SaveCategory", new CategoryViewModel());
+            return View("SaveCategory", new SaveCategoryViewModel());
         }
 
         [HttpPost]

@@ -18,7 +18,8 @@ namespace EMarketApp.Core.Application.Services
 
         public async Task<List<AdViewModel>> GetAllViewModel()
         {
-            var adsList = await _adRepository.GetAllAsync();
+            var adsList = await _adRepository.GetAllWithIncludeAsync(new List<string> { "Categories" });
+
             return adsList.Select(ad => new AdViewModel
             {
                 Id = ad.Id,
@@ -153,9 +154,9 @@ namespace EMarketApp.Core.Application.Services
 
         public async Task<AdViewModel> GetAdDetailsByIdAsync(int id)
         {
-            var ad = await _adRepository.GetByIdAsync(id);
+            var adsList = await _adRepository.GetAllWithIncludeAsync(new List<string> { "Categories" });
 
-            AdViewModel vm = new()
+            var adViewModelList = adsList.Select(ad => new AdViewModel
             {
                 Id = ad.Id,
                 Name = ad.Name,
@@ -166,10 +167,11 @@ namespace EMarketApp.Core.Application.Services
                 Price = ad.Price,
                 Description = ad.Description,
                 Category = ad.Categories.Name,
-                //CategoryId = ad.CategoryId,
-            };
+                CreateAt = ad.Created,
 
-            return vm;
+            }).Where(ad => ad.Id == id).First();
+
+            return adViewModelList;
         }
 
     }

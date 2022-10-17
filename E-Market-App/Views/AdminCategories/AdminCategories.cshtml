@@ -35,7 +35,7 @@
                     <div class="card-body">
                         <h5 class="card-title mb-2">@category.Name</h5>
                         <p>@category.Description</p>
-                        <p><i class="fw-bold mb-0 me-2">Associated ads: </i> 20 ads</p>
+                        <p><i class="fw-bold mb-0 me-2">Associated ads: </i> @category.AdsQuantity ads</p>
                         <p><i class="fw-bold mt-0 me-2">Associated users: </i> 5 users</p>
                         <a asp-controller="AdminCategories" asp-action="Delete" asp-route-id="@category.Id" class="btn btn-danger float-end">
                             <i class='bx bxs-trash'></i>

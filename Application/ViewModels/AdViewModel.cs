@@ -18,6 +18,8 @@ namespace EMarketApp.Core.Application.ViewModels
 
         public string? Category { get; set; }
 
+        public DateTime? CreateAt { get; set; }
+
         public int? CategoryId { get; set; }
     }
 }

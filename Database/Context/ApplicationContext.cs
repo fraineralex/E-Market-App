@@ -10,6 +10,7 @@ namespace EMarketApp.Infrastructure.Persistence.Context
 
         public DbSet<Ads>? Ads { get; set; }
         public DbSet<Categories>? Categories { get; set; }
+        public DbSet<Users>? Users { get; set; }
 
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
         {
@@ -39,15 +40,30 @@ namespace EMarketApp.Infrastructure.Persistence.Context
             #region tables
             modelBuilder.Entity<Ads>().ToTable("Ads");
             modelBuilder.Entity<Categories>().ToTable("Categories");
+            modelBuilder.Entity<Users>().ToTable("Users");
             #endregion
 
             #region "primary keys"
             modelBuilder.Entity<Ads>().HasKey(ad => ad.Id);
             modelBuilder.Entity<Categories>().HasKey(category => category.Id);
+            modelBuilder.Entity<Users>().HasKey(user => user.Id);
             #endregion
 
             #region relationships
-            modelBuilder.Entity<Categories>()
+
+            modelBuilder.Entity<Users>()
+                 .HasMany(user => user.Ads)
+                 .WithOne(ad => ad.Users)
+                 .HasForeignKey(ad => ad.UserId)
+                 .OnDelete(DeleteBehavior.Cascade);
+
+          modelBuilder.Entity<Users>()
+                 .HasMany(user => user.Categories)
+                 .WithOne(category => category.Users)
+                 .HasForeignKey(category => category.UserId)
+                 .OnDelete(DeleteBehavior.Cascade);
+
+          modelBuilder.Entity<Categories>()
                 .HasMany(category => category.Ads)
                 .WithOne(ad => ad.Categories)
                 .HasForeignKey(ad => ad.CategoryId)
@@ -97,6 +113,38 @@ namespace EMarketApp.Infrastructure.Persistence.Context
             modelBuilder.Entity<Categories>()
                 .Property(categories => categories.Description)
                 .IsRequired();
+            #endregion
+
+            #region users
+            modelBuilder.Entity<Users>()
+                .Property(user => user.Name)
+                .IsRequired()
+                .HasMaxLength(100);
+
+            modelBuilder.Entity<Users>()
+                .Property(user => user.LastName)
+                .IsRequired()
+                .HasMaxLength(50);
+
+            modelBuilder.Entity<Users>()
+                .Property(user => user.Email)
+                .IsRequired()
+                .HasMaxLength(50);
+
+            modelBuilder.Entity<Users>()
+                .Property(user => user.Phone)
+                .IsRequired()
+                .HasMaxLength(20);
+
+            modelBuilder.Entity<Users>()
+                .Property(user => user.User)
+                .IsRequired()
+                .HasMaxLength(50);
+
+            modelBuilder.Entity<Users>()
+                .Property(user => user.Password)
+                .IsRequired()
+                .HasMaxLength(50);
             #endregion
 
             #endregion

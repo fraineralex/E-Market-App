@@ -16,12 +16,13 @@ namespace EMarketApp.Core.Application.Services
 
         public async Task<List<CategoryViewModel>> GetAllViewModel()
         {
-            var categoriesList = await _categoryRepository.GetAllAsync();
+            var categoriesList = await _categoryRepository.GetAllWithIncludeAsync(new List<string> { "Ads" });
             return categoriesList.Select(category => new CategoryViewModel
             {
                 Id = category.Id,
                 Name = category.Name,
                 Description = category.Description,
+                AdsQuantity = category.Ads.Count()
 
             }).ToList();
         }

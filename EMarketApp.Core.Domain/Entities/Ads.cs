@@ -16,8 +16,10 @@ namespace EMarketApp.Core.Domain.Entities
         // Foreign key fields
 
         public int CategoryId { get; set; }
+        public int UserId { get; set; }
 
         //Navigation property
         public Categories? Categories { get; set; }
+        public Users? Users { get; set; }
     }
 }

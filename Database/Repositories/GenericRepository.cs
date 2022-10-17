@@ -39,7 +39,7 @@ namespace EMarketApp.Infrastructure.Persistence.Repositories
             return await _dbContext.Set<Entity>().FindAsync(id);
         }
 
-        public async Task<List<Entity>> GetAllWhitIncludeAsync(List<string> properties)
+        public async Task<List<Entity>> GetAllWithIncludeAsync(List<string> properties)
         {
             var query = _dbContext.Set<Entity>().AsQueryable();
 
@@ -47,8 +47,8 @@ namespace EMarketApp.Infrastructure.Persistence.Repositories
             {
                 query = query.Include(property);
             }
-            return await query.ToListAsync();
 
+            return await query.ToListAsync();
         }
     }
 }
