@@ -25,4 +25,8 @@
     <ProjectReference Include="..\EMarketApp.Core.Domain\EMarketApp.Core.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\Images\Ads\" />
+  </ItemGroup>
+
 </Project>

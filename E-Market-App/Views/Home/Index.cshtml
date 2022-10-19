@@ -7,7 +7,7 @@
 @if (Model != null && Model.Count != 0)
 {
     <form method="POST" asp-controller="Home" asp-action="Index" class="position-absolute py-5 mt-4 top-0 end-0 custom">
-            <select class="mt-2 me-2" id="checkboxes-select" multiple name="CategoryId" placeholder="Filter by category"
+        <select class="mt-2 me-2" id="checkboxes-select" multiple name="CategoryId" placeholder="Filter by category"
               data-search="false" data-silent-initial-value-set="true" aria-describedby="button">
                 @foreach (var category in ViewBag.CategoriesList)
                 {

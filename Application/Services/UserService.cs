@@ -31,7 +31,7 @@ namespace EMarketApp.Core.Application.Services
             }).ToList();
         }
 
-        public async Task Add(SaveUserViewModel vm)
+        public async Task<SaveUserViewModel> Add(SaveUserViewModel vm)
         {
             Users user = new();
             user.Id = vm.Id;
@@ -41,7 +41,19 @@ namespace EMarketApp.Core.Application.Services
             user.Phone = vm.Phone;
             user.Username = vm.Username;
             user.Password = vm.Password;
-            await _userRepository.AddAsync(user);
+
+            user = await _userRepository.AddAsync(user);
+
+            SaveUserViewModel userVm = new();
+            userVm.Id = user.Id;
+            userVm.Name = user.Name;
+            userVm.LastName = user.LastName;
+            userVm.Email = user.Email;
+            userVm.Phone = user.Phone;
+            userVm.Username = user.Username;
+            userVm.Password = user.Password;
+
+            return userVm;
         }
 
         public async Task Update(SaveUserViewModel vm)

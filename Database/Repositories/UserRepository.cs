@@ -16,10 +16,10 @@ namespace EMarketApp.Infrastructure.Persistence.Repositories
             _dbContext = dbContext;
         }
 
-        public override async Task AddAsync(Users entity)
+        public override async Task<Users> AddAsync(Users entity)
         {
             entity.Password = PasswordEncryption.ComputeSha256Hash(entity.Password);
-            await base.AddAsync(entity);
+            return await base.AddAsync(entity);
         }
 
         public async Task<Users> LoginAsync(LoginViewModel loginVm)

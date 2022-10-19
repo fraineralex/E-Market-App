@@ -7,7 +7,7 @@ namespace EMarketApp.Core.Application.Interfaces.Services
         where SaveViewModel : class
     {
         Task<List<ViewModel>> GetAllViewModel();
-        Task Add(SaveViewModel vm);
+        Task<SaveViewModel> Add(SaveViewModel vm);
         Task Update(SaveViewModel vm);
         Task Delete(int id);
         Task<SaveViewModel> GetSaveViewModelById(int id);

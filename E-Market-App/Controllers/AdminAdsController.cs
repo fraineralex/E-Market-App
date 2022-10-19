@@ -46,13 +46,25 @@ namespace Pokedex_App.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(SaveAdViewModel vm)
         {
+            if (!_validateUserSession.HasUser())
+            {
+                return RedirectToRoute(new { controller = "User", action = "Index" });
+            }
+
             if (!ModelState.IsValid)
             {
                 vm.CategoriesList = await _categoryService.GetAllViewModel();
                 return View("SaveAd", vm);
             }
 
-            await _adService.Add(vm);
+            SaveAdViewModel adVm = await _adService.Add(vm);
+
+            //if (adVm != null && adVm.Id != 0)
+            //{
+            //    adVm.ImagePathOne = UploadFile(vm.File, adVm.Id);
+            //    await _adService.Update(adVm);
+            //}
+
             return RedirectToRoute(new { controller = "adminAds", action = "Index" });
         }
 
@@ -64,7 +76,9 @@ namespace Pokedex_App.Controllers
             }
 
             ViewBag.Page = "adminAds";
-            return View("SaveAd", await _adService.GetSaveViewModelById(id));
+            SaveAdViewModel saveAdViewModel = await _adService.GetSaveViewModelById(id);
+            saveAdViewModel.CategoriesList = await _categoryService.GetAllViewModel();
+            return View("SaveAd", saveAdViewModel);
         }
 
         [HttpPost]
@@ -106,6 +120,32 @@ namespace Pokedex_App.Controllers
 
             await _adService.Delete(id);
             return RedirectToRoute(new { controller = "adminAds", action = "Index" });
+        }
+
+        private string UploadFile(IFormFile file, int id)
+        {
+            //get directory path
+            string basePath = $"/Images/Ads/{id}";
+            string path = Path.Combine(Directory.GetCurrentDirectory(), $"wwwroot{basePath}");
+
+            //create folder if not exist
+            if (Directory.Exists(path))
+            {
+                Directory.CreateDirectory(path);
+            }
+
+            //get file path
+            Guid guid = Guid.NewGuid();
+            FileInfo fileInfo = new(file.FileName);
+            string fileName = fileInfo.Name + fileInfo.Extension;
+
+            string fileNameWhitPath = Path.Combine(path, fileName);
+
+            using(var stream = new FileStream(fileNameWhitPath, FileMode.Create))
+            {
+                file.CopyTo(stream);
+            }
+            return Path.Combine(basePath,fileName);
         }
     }
 }

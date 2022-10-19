@@ -11,5 +11,7 @@ namespace EMarketApp.Core.Application.ViewModels
 
         public int AdsQuantity { get; set; }
 
+        public int UsersQuantity { get; set; }
+
     }
 }

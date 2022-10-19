@@ -1,8 +1,10 @@
-﻿@model EMarketApp.Core.Application.ViewModels.SaveAdViewModel
+﻿@using EMarketApp.Core.Application.ViewModels
+@model SaveAdViewModel
 @{
     bool editMode = Model.Id == 0 ? false : true;
     ViewData["Title"] = "Create Ad";
 }
+
 
 @if(Model.CategoriesList.Count == 0)
 {
@@ -11,7 +13,7 @@
 }
 else 
 {
-    <form class="row g-3 needs-validation py-5 mt-2" method="POST" asp-controller="AdminAds" asp-action="@(editMode ? "Edit" : "Create")">
+    <form method="post" asp-controller="AdminAds" asp-action="@(editMode ? "Edit" : "Create")" enctype="multipart/form-data" class="row g-3 needs-validation py-5 mt-2">
         <div class="col-6 m-md-auto mt-5">
             <div class="card mb-5">
                 <div class="card-header bg-black text-white">
@@ -28,12 +30,6 @@ else
                         <label asp-for="Name" class="form-label"><strong>Name</strong></label>
                         <input type="text" class="form-control" asp-for="Name" name="Name" required>
                         <span asp-validation-for="Name" class="text-danger"></span>
-                    </div>
-
-                    <div class="mb-3">
-                        <label asp-for="ImagePathOne" class="form-label"><strong>Image URL</strong></label>
-                        <input type="text" class="form-control" asp-for="ImagePathOne" name="ImagePathOne" required>
-                        <span asp-validation-for="ImagePathOne" class="text-danger"></span>
                     </div>
 
                     <div class="mb-3">
@@ -57,6 +53,15 @@ else
                             }
                         </select>
                         <span asp-validation-for="CategoryId" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="ImagePathOne" class="form-label"><strong>Upload Image</strong></label>
+                        <input class="form-control" asp-for="ImagePathOne">
+                        <input class="form-control" asp-for="ImagePathTwo">
+                        <input class="form-control" asp-for="ImagePathThree">
+                        <input class="form-control" asp-for="ImagePathFour">
+                        <span asp-validation-for="ImagePathOne" class="text-danger"></span>
                     </div>
 
                     <input type="hidden" asp-for="Id" />
