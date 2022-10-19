@@ -138,7 +138,7 @@ namespace EMarketApp.Infrastructure.Persistence.Context
             modelBuilder.Entity<Users>()
                 .Property(user => user.Password)
                 .IsRequired()
-                .HasMaxLength(50);
+                .HasMaxLength(100);
             #endregion
 
             #endregion

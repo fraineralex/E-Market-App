@@ -81,5 +81,26 @@ namespace EMarketApp.Core.Application.Services
 
             return vm;
         }
+
+        public async Task<UserViewModel> Login(LoginViewModel loginVm)
+        {
+            Users user = await _userRepository.LoginAsync(loginVm);
+
+            if(user == null)
+            {
+                return null;
+            }
+
+            UserViewModel userVm = new();
+            userVm.Id = user.Id;
+            userVm.Name = user.Name;
+            userVm.LastName = user.LastName;
+            userVm.Email = user.Email;
+            userVm.Phone = user.Phone;
+            userVm.Username = user.Username;
+            userVm.Password = user.Password;
+
+            return userVm;
+        }
     }
 }

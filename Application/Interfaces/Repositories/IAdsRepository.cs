@@ -1,8 +1,9 @@
-﻿using EMarketApp.Core.Domain.Entities;
+﻿using EMarketApp.Core.Application.ViewModels;
+using EMarketApp.Core.Domain.Entities;
 
 namespace EMarketApp.Core.Application.Interfaces.Repositories
 {
-    public interface IUsersRepository : IGenericRepository<Users>
+    public interface IAdsRepository : IGenericRepository<Ads>
     {
 
     }

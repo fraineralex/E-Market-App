@@ -1,7 +1,9 @@
-﻿using EMarketApp.Core.Application.Interfaces.Repositories;
+﻿using EMarketApp.Core.Application.Helpers;
+using EMarketApp.Core.Application.Interfaces.Repositories;
 using EMarketApp.Core.Application.Interfaces.Services;
 using EMarketApp.Core.Application.ViewModels;
 using EMarketApp.Core.Domain.Entities;
+using Microsoft.AspNetCore.Http;
 
 namespace EMarketApp.Core.Application.Services
 {
@@ -9,18 +11,22 @@ namespace EMarketApp.Core.Application.Services
     {
         private readonly IAdsRepository _adRepository;
         private readonly ICategoryService _categoryService;
+        private readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly UserViewModel userViewModel;
 
-        public AdService(IAdsRepository AdRepository, ICategoryService categoryService)
+        public AdService(IAdsRepository AdRepository, ICategoryService categoryService, IHttpContextAccessor httpContextAccessor)
         {
             _adRepository = AdRepository;
             _categoryService = categoryService;
+            _httpContextAccessor = httpContextAccessor;
+            userViewModel = _httpContextAccessor.HttpContext.Session.Get<UserViewModel>("user");
         }
 
         public async Task<List<AdViewModel>> GetAllViewModel()
         {
             var adsList = await _adRepository.GetAllWithIncludeAsync(new List<string> { "Categories" });
 
-            return adsList.Select(ad => new AdViewModel
+            return adsList.Where(ad => ad.UserId == userViewModel.Id).Select(ad => new AdViewModel
             {
                 Id = ad.Id,
                 Name = ad.Name,
@@ -38,6 +44,7 @@ namespace EMarketApp.Core.Application.Services
         public async Task Add(SaveAdViewModel vm)
         {
             Ads ad = new();
+            ad.UserId = userViewModel.Id;
             ad.Name = vm.Name;
             ad.ImagePathOne = vm.ImagePathOne;
             ad.ImagePathTwo = vm.ImagePathTwo;
@@ -94,7 +101,7 @@ namespace EMarketApp.Core.Application.Services
         public async Task<List<AdViewModel>> GetAllViewModelWithFilters(FilterViewModel vm)
         {
             var adsList = await _adRepository.GetAllAsync();
-            var adViewModelList = adsList.Select(ad => new AdViewModel
+            var adViewModelList = adsList.Where(ad => ad.UserId == userViewModel.Id).Select(ad => new AdViewModel
             {
                 Id = ad.Id,
                 Name = ad.Name,
@@ -137,7 +144,7 @@ namespace EMarketApp.Core.Application.Services
         {
             var adsList = await _adRepository.GetAllWithIncludeAsync(new List<string> { "Categories" });
 
-            var adViewModelList = adsList.Select(ad => new AdViewModel
+            var adViewModelList = adsList.Where(ad => ad.Id == id && ad.UserId == userViewModel.Id).Select(ad => new AdViewModel
             {
                 Id = ad.Id,
                 Name = ad.Name,
@@ -150,7 +157,7 @@ namespace EMarketApp.Core.Application.Services
                 Category = ad.Categories.Name,
                 CreateAt = ad.Created,
 
-            }).Where(ad => ad.Id == id).First();
+            }).First();
 
             return adViewModelList;
         }

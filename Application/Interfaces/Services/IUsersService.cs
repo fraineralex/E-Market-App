@@ -4,6 +4,6 @@ namespace EMarketApp.Core.Application.Interfaces.Services
 {
     public interface IUsersService : IGenericService<UserViewModel, SaveUserViewModel>
     {
-
+        Task<UserViewModel> Login(LoginViewModel loginVm);
     }
 }

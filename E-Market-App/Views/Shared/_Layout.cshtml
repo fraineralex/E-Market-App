@@ -1,4 +1,11 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Http;
+@using EMarketApp.Core.Application.Helpers;
+@using EMarketApp.Core.Application.ViewModels;
+@inject IHttpContextAccessor httpContext;
+@{
+    UserViewModel User = httpContext.HttpContext.Session.Get<UserViewModel>("user");
+}
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -59,6 +66,13 @@
                         <a class="nav-link fw-bold fs-5 @(adminCategoriesPage ? "active" : "" )" aria-current="page"
                            asp-controller="AdminCategories" asp-action="Index">Categories</a>
                     </li>
+                    @if (User != null)
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link fw-bold fs-5 float-end" aria-current="page"
+                           asp-controller="User" asp-action="Logout">Logout</a>
+                        </li>
+                    }
                 </ul>
                 @if (ViewBag.Page == "home")
                 {
