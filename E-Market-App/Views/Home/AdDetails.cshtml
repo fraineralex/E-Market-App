@@ -4,20 +4,20 @@
     ViewData["Title"] = "Ad Details";
 }
 
-<section class="py-3 text-center container">
-    <div class="row py-lg-5">
+<section class="py-2 text-center container">
+    <div class="row py-lg-3">
         <div class="col-lg-6 col-md-8 mx-auto">
-            <h1 class="fw-bold">Details</h1>
-            <p class="lead text-muted">
+            <h1 class="fw-bold text-center"> Details</h1>
+            <p class="fs-3 fw-bold text-secondary mt-1 text-center">
                 Here you can view in more detail all the information of the selected ad.
             </p>
         </div>
-    </div>
+     </div>
 </section>
 
 <div class="row mb-5">
     <div class="col-6 p-0 m-0">
-        <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="true">
+        <div id="carouselExampleIndicators" class="carousel carousel-dark slide" data-bs-ride="true">
             <div class="carousel-indicators">
                 <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
                 @if(Model.ImagePathTwo != null){<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>}

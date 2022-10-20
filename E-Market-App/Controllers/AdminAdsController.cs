@@ -2,6 +2,7 @@
 using EMarketApp.Core.Application.Interfaces.Services;
 using EMarketApp.Core.Application.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using System.IO;
 
 namespace Pokedex_App.Controllers
 {
@@ -59,11 +60,14 @@ namespace Pokedex_App.Controllers
 
             SaveAdViewModel adVm = await _adService.Add(vm);
 
-            //if (adVm != null && adVm.Id != 0)
-            //{
-            //    adVm.ImagePathOne = UploadFile(vm.File, adVm.Id);
-            //    await _adService.Update(adVm);
-            //}
+            if (adVm != null && adVm.Id != 0)
+            {
+                adVm.ImagePathOne = UploadFile(vm.File1, adVm.Id);
+                adVm.ImagePathTwo = UploadFile(vm.File2, adVm.Id);
+                adVm.ImagePathThree = UploadFile(vm.File3, adVm.Id);
+                adVm.ImagePathFour = UploadFile(vm.File4, adVm.Id);
+                await _adService.Update(adVm);
+            }
 
             return RedirectToRoute(new { controller = "adminAds", action = "Index" });
         }
@@ -129,7 +133,7 @@ namespace Pokedex_App.Controllers
             string path = Path.Combine(Directory.GetCurrentDirectory(), $"wwwroot{basePath}");
 
             //create folder if not exist
-            if (Directory.Exists(path))
+            if (!Directory.Exists(path))
             {
                 Directory.CreateDirectory(path);
             }
@@ -138,14 +142,14 @@ namespace Pokedex_App.Controllers
             Guid guid = Guid.NewGuid();
             FileInfo fileInfo = new(file.FileName);
             string fileName = fileInfo.Name + fileInfo.Extension;
-
             string fileNameWhitPath = Path.Combine(path, fileName);
 
-            using(var stream = new FileStream(fileNameWhitPath, FileMode.Create))
+            using (var stream = new FileStream(fileNameWhitPath, FileMode.Create))
             {
                 file.CopyTo(stream);
             }
-            return Path.Combine(basePath,fileName);
+
+            return $"{basePath}/{fileName}";
         }
     }
 }

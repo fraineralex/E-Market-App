@@ -46,46 +46,49 @@
         }
     }
 
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container-fluid">
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link fw-bold fs-5 @(homePage ? "active" : "" )" aria-current="page" asp-controller="Home" asp-action="Index">Home</a>
-                    </li>
-                    @if(AdDetailsPage){
+    @if (User != null)
+    {
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container-fluid">
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link fw-bold fs-5 active" aria-current="page">Details</a>
+                            <a class="nav-link fw-bold fs-5 @(homePage ? "active" : "" )" aria-current="page" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
-                    }
-                    <li class="nav-item">
-                        <a class="nav-link fw-bold fs-5 @(adminAdsPage ? "active" : "" )" aria-current="page"
-                           asp-controller="AdminAds" asp-action="Index">My ads</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link fw-bold fs-5 @(adminCategoriesPage ? "active" : "" )" aria-current="page"
-                           asp-controller="AdminCategories" asp-action="Index">Categories</a>
-                    </li>
-                    @if (User != null)
-                    {
+                        @if (AdDetailsPage)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link fw-bold fs-5 active" aria-current="page">Details</a>
+                            </li>
+                        }
                         <li class="nav-item">
+                            <a class="nav-link fw-bold fs-5 @(adminAdsPage ? "active" : "" )" aria-current="page"
+                           asp-controller="AdminAds" asp-action="Index">My ads</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link fw-bold fs-5 @(adminCategoriesPage ? "active" : "" )" aria-current="page"
+                           asp-controller="AdminCategories" asp-action="Index">Categories</a>
+                        </li>
+
+                        <li class="nav-item float-end">
                             <a class="nav-link fw-bold fs-5 float-end" aria-current="page"
                            asp-controller="User" asp-action="Logout">Logout</a>
                         </li>
-                    }
-                </ul>
-                @if (ViewBag.Page == "home")
-                {
-                    <form class="d-flex" role="search" method="post" asp-action="Index">
-                        <input class="form-control me-2" type="search" name="AdName"
-                           placeholder="Search for an ad..." aria-label="Search" required>
-                        <button class="btn btn-dark border-white" type="submit">Search</button>
-                    </form>
-                }
 
+                    </ul>
+                    @if (ViewBag.Page == "home")
+                    {
+                        <form class="d-flex" role="search" method="post" asp-action="Index">
+                            <input class="form-control me-2" type="search" name="AdName"
+                           placeholder="Search for an ad..." aria-label="Search" required>
+                            <button class="btn btn-dark border-white" type="submit">Search</button>
+                        </form>
+                    }
+
+                </div>
             </div>
-        </div>
-    </nav>
+        </nav>
+    }
     <div class="container" id="main-container">
         <main role="main" class="pb-3">
             @RenderBody()

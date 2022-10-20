@@ -111,6 +111,10 @@ namespace EMarketApp.Infrastructure.Persistence.Context
 
             #region users
             modelBuilder.Entity<Users>()
+                .HasIndex(user => user.Username)
+                .IsUnique();
+
+            modelBuilder.Entity<Users>()
                 .Property(user => user.Name)
                 .IsRequired()
                 .HasMaxLength(100);

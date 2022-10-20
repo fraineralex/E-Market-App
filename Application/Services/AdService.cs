@@ -46,7 +46,7 @@ namespace EMarketApp.Core.Application.Services
             Ads ad = new();
             ad.UserId = userViewModel.Id;
             ad.Name = vm.Name;
-            ad.ImagePathOne = vm.ImagePathOne;
+            ad.ImagePathOne = "none";
             ad.ImagePathTwo = vm.ImagePathTwo;
             ad.ImagePathThree = vm.ImagePathThree;
             ad.ImagePathFour = vm.ImagePathFour;
@@ -134,7 +134,7 @@ namespace EMarketApp.Core.Application.Services
             {
                 Console.WriteLine(vm.CategoryId);
                 adViewModelList = adViewModelList
-                    .Where(ad => ad.CategoryId == vm.CategoryId.Value)
+                    .Where(ad => ad.CategoryId == 1)
                     .ToList();
             }
 
@@ -152,7 +152,7 @@ namespace EMarketApp.Core.Application.Services
         {
             var adsList = await _adRepository.GetAllWithIncludeAsync(new List<string> { "Categories", "Users" });
 
-            var adViewModelList = adsList.Where(ad => ad.Id == id && ad.UserId == userViewModel.Id).Select(ad => new DetailsAdViewModel
+            var adViewModelList = adsList.Where(ad => ad.Id == id && ad.UserId != userViewModel.Id).Select(ad => new DetailsAdViewModel
             {
                 Name = ad.Name,
                 ImagePathOne = ad.ImagePathOne,

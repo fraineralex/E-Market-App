@@ -13,7 +13,7 @@
 }
 else 
 {
-    <form method="post" asp-controller="AdminAds" asp-action="@(editMode ? "Edit" : "Create")" enctype="multipart/form-data" class="row g-3 needs-validation py-5 mt-2">
+    <form method="post" asp-controller="AdminAds" runat="server" asp-action="@(editMode ? "Edit" : "Create")" EncType="multipart/form-data" class="row g-3 needs-validation py-5 mt-2">
         <div class="col-6 m-md-auto mt-5">
             <div class="card mb-5">
                 <div class="card-header bg-black text-white">
@@ -57,16 +57,16 @@ else
 
                     <div class="mb-3">
                         <label asp-for="ImagePathOne" class="form-label"><strong>Upload Image</strong></label>
-                        <input class="form-control" asp-for="ImagePathOne">
-                        <input class="form-control" asp-for="ImagePathTwo">
-                        <input class="form-control" asp-for="ImagePathThree">
-                        <input class="form-control" asp-for="ImagePathFour">
+                        <input class="form-control mb-2" type="file" runat="server" asp-for="File1">
+                        <input class="form-control mb-2" type="file" runat="server" asp-for="File2">
+                        <input class="form-control mb-2" type="file" runat="server" asp-for="File3">
+                        <input class="form-control" type="file" runat="server" asp-for="File4">
                         <span asp-validation-for="ImagePathOne" class="text-danger"></span>
                     </div>
 
                     <input type="hidden" asp-for="Id" />
 
-                    <button type="submit" class="btn btn-primary float-end mt-2 ms-2">@(
+                    <button type="submit" runat="server" class="btn btn-primary float-end mt-2 ms-2">@(
                     editMode ? "Actualizar" : "Registrar"
                     )</button>
                     <a asp-controller="AdminAds" asp-action="Index" class="btn btn-dark float-end mt-2">Regresar</a>

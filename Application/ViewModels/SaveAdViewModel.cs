@@ -9,7 +9,6 @@ namespace EMarketApp.Core.Application.ViewModels
         [Required (ErrorMessage = "You must enter the name of the ad")]
         [DataType(DataType.Text)]
         public string? Name { get; set; }
-        //[Required(ErrorMessage = "You must upload at least one image of the ad")]
         public string? ImagePathOne { get; set; }
         public string? ImagePathTwo { get; set; }
         public string? ImagePathThree { get; set; }
@@ -26,8 +25,10 @@ namespace EMarketApp.Core.Application.ViewModels
 
         public List<CategoryViewModel>? CategoriesList { get; set; }
 
-        [DataType(DataType.Upload)]
-        public IFormFile? File { get; set; }
+        public IFormFile File1 { get; set; }
+        public IFormFile File2 { get; set; }
+        public IFormFile File3 { get; set; }
+        public IFormFile File4 { get; set; }
 
     }
 
