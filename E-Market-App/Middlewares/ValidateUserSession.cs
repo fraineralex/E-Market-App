@@ -1,5 +1,5 @@
 ﻿using EMarketApp.Core.Application.Helpers;
-using EMarketApp.Core.Application.ViewModels;
+using EMarketApp.Core.Application.ViewModels.Users;
 
 namespace E_Market_App.Middlewares
 {

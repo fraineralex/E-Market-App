@@ -1,6 +1,6 @@
 ﻿using E_Market_App.Middlewares;
 using EMarketApp.Core.Application.Interfaces.Services;
-using EMarketApp.Core.Application.ViewModels;
+using EMarketApp.Core.Application.ViewModels.Ads;
 using Microsoft.AspNetCore.Mvc;
 using System.IO;
 
@@ -154,7 +154,7 @@ namespace Pokedex_App.Controllers
             return RedirectToRoute(new { controller = "adminAds", action = "Index" });
         }
         
-        private string UploadFile(IFormFile file, int id, bool isEditMode = false, string imageURL = "")
+        private string UploadFile(IFormFile file, int id, bool isEditMode = false, string imageURL = null)
         {
             if (file != null)
             {
@@ -185,7 +185,7 @@ namespace Pokedex_App.Controllers
                     file.CopyTo(stream);
                 }
 
-                if (isEditMode)
+                if (isEditMode && imageURL != null)
                 {
                     string[] oldImagePath = imageURL.Split("/");
                     string oldImageName = oldImagePath[^1];

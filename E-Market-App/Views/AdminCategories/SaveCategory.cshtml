@@ -1,37 +1,52 @@
-﻿@model EMarketApp.Core.Application.ViewModels.SaveCategoryViewModel
+﻿@using EMarketApp.Core.Application.ViewModels.Categories
+@model SaveCategoryViewModel
+
 @{
     bool editMode = Model.Id == 0 ? false : true;
-    ViewData["Title"] = "Create Category";
+    if (editMode) { ViewData["Title"] = "Updating Category"; } else { ViewData["Title"] = "Creating Category"; };
 }
 
-<form class="row g-3 needs-validation py-5 mt-2" method="POST" asp-controller="AdminCategories" asp-action="@(editMode ? "Edit" : "Create")">
-    <div class="col-6 m-md-auto mt-5">
-        <div class="card mb-5">
-            <div class="card-header bg-black text-white">
-                <h4 class="text-center">@(editMode ? $"Editing the category: {Model.Name}" : "Creating a new category")</h4>
-            </div>
-            <div class="card-body">
-                <div class="card-title">
-                    <h4 class="text-center mb-4">Fill in all the fields below</h4>
+<section class="container">
+    <div class="row mx-auto">
+
+        <div class="col-lg-6 col-md-8 mx-auto">
+
+            <h1 class="fw-bold mt-4 text-center"> Categories Manager</h1>
+            <p class="fs-3 fw-bold text-secondary mt-1 text-center">
+                @(editMode ? $"Editing the category => '{Model.Name}'" : "Here you can create a new category with the features that you want")
+            </p>
+
+            <div class="col-12 mx-auto card bg-dark text-white mt-5 mb-5" style="border-radius: 1rem;">
+                <div class="card-body">
+
+                    <h2 class="fw-bold mb-3 text-uppercase text-center mt-2">@(editMode ? "Updating category" : "Creating a new category")</h2>
+                    <p class="text-white-50 fs-5 mb-3 text-center">Please fill in all the fields below!</p>
+
+                    <form class="needs-validation" method="POST" asp-controller="AdminCategories" asp-action="@(editMode ? "Edit" : "Create")">
+
+                        <div class="p-3 pt-0">
+                            <label asp-for="Name" class="form-label text-white"><strong>Name <small class="text-danger"> *</small></strong></strong></label>
+                            <input type="text" class="form-control bg-dark text-white border-white form-control-lg"
+                                   asp-for="Name">
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
+
+                        <div class="p-3 pt-0">
+                            <label asp-for="Description" class="form-label text-white"><strong>Description <small class="text-danger"> *</small></strong></strong></label>
+                            <textarea type="text" class="form-control bg-dark text-white border-white form-control-lg" asp-for="Description" rows="4" name="Description"></textarea>
+                            <span asp-validation-for="Description" class="text-danger"></span>
+                        </div>
+
+                        <input type="hidden" asp-for="Id" />
+
+                        <button class="btn btn-primary btn-lg float-end" type="submit">
+                            @(
+                                editMode ? "Update" : "Create")
+                        </button>
+                        <a class="btn btn-light btn-lg float-end me-2" asp-controller="AdminCategories" asp-action="Index">Back</a>
+                    </form>
                 </div>
-
-                <div class="mb-3">
-                    <label asp-for="Name" class="form-label"><strong>Name</strong></label>
-                    <input type="text" class="form-control" asp-for="Name" name="Name" required>
-                    <span asp-validation-for="Name" class="text-danger"></span>
-                </div>
-
-                <div class="mb-3">
-                    <label asp-for="Description" class="form-label"><strong>Description</strong></label>
-                    <textarea type="text" class="form-control" asp-for="Description" rows="4" required></textarea>
-                    <span asp-validation-for="Description" class="text-danger"></span>
-                </div>
-
-                <input type="hidden" asp-for="Id" />
-
-                <button type="submit" class="btn btn-primary float-end mt-2 ms-2">@(editMode ? "Actualizar" : "Registrar")</button>
-                <a asp-controller="AdminCategories" asp-action="Index" class="btn btn-dark float-end mt-2">Regresar</a>
             </div>
         </div>
     </div>
-</form>
+</section>

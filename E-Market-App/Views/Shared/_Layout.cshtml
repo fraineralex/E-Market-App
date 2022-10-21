@@ -1,6 +1,6 @@
 ﻿@using Microsoft.AspNetCore.Http;
 @using EMarketApp.Core.Application.Helpers;
-@using EMarketApp.Core.Application.ViewModels;
+@using EMarketApp.Core.Application.ViewModels.Users
 @inject IHttpContextAccessor httpContext;
 @{
     UserViewModel User = httpContext.HttpContext.Session.Get<UserViewModel>("user");
@@ -10,7 +10,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - E_Market_App</title>
+    <title>@ViewData["Title"]-E Market App</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/virtual-select.css" asp-append-version="true" />

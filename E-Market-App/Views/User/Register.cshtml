@@ -1,5 +1,5 @@
-﻿@using EMarketApp.Core.Application.ViewModels
-@model EMarketApp.Core.Application.ViewModels.SaveUserViewModel
+﻿@using EMarketApp.Core.Application.ViewModels.Users
+@model SaveUserViewModel
 @{
     ViewData["Title"] = "Sing up";
 }
@@ -24,45 +24,46 @@
                         <form asp-action="Register" asp-controller="User" method="POST">
 
                             <div class="p-3 pt-0">
-                                <label asp-for="Name" class="form-label text-white"><strong>Name</strong></label>
+                                <label asp-for="Name" class="form-label text-white"><strong>Name <small class="text-danger"> *</small></strong></strong></label>
                                 <input type="text" class="form-control bg-dark text-white border-white form-control-lg"
-                                        asp-for="Name" required>
+                                        asp-for="Name">
                                 <span asp-validation-for="Name" class="text-danger"></span>
                             </div>
 
                             <div class="p-3 pt-0">
-                                <label asp-for="LastName" class="form-label text-white"><strong>Last Name</strong></label>
+                                <label asp-for="LastName" class="form-label text-white"><strong>Last Name <small class="text-danger"> *</small></strong></strong></label>
                                 <input type="text" class="form-control bg-dark text-white border-white form-control-lg"
-                                       asp-for="LastName" required>
+                                       asp-for="LastName">
                                 <span asp-validation-for="LastName" class="text-danger"></span>
                             </div>
 
                             <div class="p-3 pt-0">
-                                <label asp-for="Email" class="form-label text-white"><strong>Email Adrees</strong></label>
+                                <label asp-for="Email" class="form-label text-white"><strong>Email Adrees <small class="text-danger"> *</small></strong></strong></label>
                                 <input type="email" class="form-control bg-dark text-white border-white form-control-lg"
-                                       asp-for="Email" required>
+                                       asp-for="Email">
                                 <span asp-validation-for="Email" class="text-danger"></span>
                             </div>
 
                             <div class="p-3 pt-0">
-                                <label asp-for="Phone" class="form-label text-white"><strong>Phone</strong></label>
+                                <label asp-for="Phone" class="form-label text-white"><strong>Phone <small class="text-danger"> *</small></strong></strong></label>
                                 <input type="text" class="form-control bg-dark text-white border-white form-control-lg"
-                                       asp-for="Phone" required>
+                                       asp-for="Phone">
                                 <span asp-validation-for="Phone" class="text-danger"></span>
                             </div>
 
                             <div class="p-3 pt-0">
-                                <label asp-for="Username" class="form-label text-white"><strong>Username</strong></label>
+                                <label asp-for="Username" class="form-label text-white"><strong>Username <small class="text-danger"> *</small></strong></strong></label>
                                 <input type="text" class="form-control bg-dark text-white border-white form-control-lg"
-                                        asp-for="Username" required>
+                                        asp-for="Username">
                                 <span asp-validation-for="Username" class="text-danger"></span>
+                                @Html.ValidationMessage("userVaidation", "",new{@class = "text-danger"}, "span")
                             </div>
 
                             <div class="p-3 pt-0">
-                                <label asp-for="Password" class="form-label text-white"><strong>Password</strong></label>
+                                <label asp-for="Password" class="form-label text-white"><strong>Password <small class="text-danger"> *</small></strong></strong></label>
                                 <input type="password" id="password"
                                         class="form-control bg-dark text-white border-white form-control-lg"
-                                        asp-for="Password" required>
+                                        asp-for="Password">
                                 <span asp-validation-for="Password" class="text-danger"></span>
                             </div>
 
@@ -70,12 +71,13 @@
                                 <label asp-for="ConfirmPassword" class="form-label text-white">
                                     <strong>
                                         Confirm
-                                        Password
+                                        Password <small class="text-danger"> *</small>
+                                    </strong>
                                     </strong>
                                 </label>
                                 <input type="password"
                                         class="form-control bg-dark text-white border-white form-control-lg"
-                                        id="confirmPassword" asp-for="ConfirmPassword" required>
+                                        id="confirmPassword" asp-for="ConfirmPassword">
                                 <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
                             </div>
                             <button class="btn btn-primary btn-lg float-end" type="submit">

@@ -1,138 +1,163 @@
-﻿@using EMarketApp.Core.Application.ViewModels
+﻿@using EMarketApp.Core.Application.ViewModels.Ads
 @model SaveAdViewModel
 @{
     bool editMode = Model.Id == 0 ? false : true;
-    ViewData["Title"] = "Create Ad";
+    if (editMode) { ViewData["Title"] = "Updating Ad"; } else { ViewData["Title"] = "Creating Ad"; };
 }
 
 
 @if(Model.CategoriesList.Count == 0)
 {
-    <h1 class="text-center fw-light mb-3 mt-5 pb-5">Oops :(</h1>
-    <h4 class="text-center fw-light text-muted mb-5">You must create at least one category</h4>
+    <h1 class="fs-4 fw-bold mt-5 py-5 text-center">Oops :(</h1>
+    <h5 class="fs-4 fw-bold text-secondary mt-1 text-center">You must create at least one category</h5>
 }
 else 
 {
-    <form method="post" asp-controller="AdminAds" runat="server" asp-action="@(editMode ? "Edit" : "Create")" EncType="multipart/form-data" class="row g-3 needs-validation py-5 mt-2">
-        <div class="col-6 m-md-auto mt-5">
-            <div class="card mb-5">
-                <div class="card-header bg-black text-white">
-                    <h4 class="text-center">@(
-                            editMode ? $"Editing the ad: {Model.Name}" : "Creating a new ad"
-                    )</h4>
-                </div>
-                <div class="card-body m-0 p-0">
-                    @if(!editMode)
-                    {                    
-                        <div class="card-title">
-                             <h4 class="text-center mb-4">Fill in all the fields below </h4>
-                        </div>
-                    }
-                    <div class="row mb-5 m-0 p-0">
-                        <div class="col-12 p-0 m-0 mx-auto">
-                            <div id="carouselExampleIndicators" class="carousel carousel-dark slide m-0 p-0" data-bs-ride="true">
-                                <div class="carousel-indicators m-0 p-0">
-                                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                                    @if (Model.ImagePathTwo != null)
-                                    {
-                                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                                    }
-                                    @if (Model.ImagePathThree != null)
-                                    {
-                                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
-                                    }
-                                    @if (Model.ImagePathFour != null)
-                                    {
-                                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3" aria-label="Slide 4"></button>
-                                    }
-                                </div>
-                                <div class="carousel-inner m-0 p-0">
-                                    <div class="carousel-item active">
-                                        <img src="@Model.ImagePathOne" class="d-block w-100 detail img-custom-edit" alt="image">
+    <section class="container">
+        <div class="row mx-auto">
+
+            <div class="col-lg-6 col-md-8 mx-auto">
+
+                <h1 class="fw-bold mt-4 text-center"> Ads Manager</h1>
+                <p class="fs-3 fw-bold text-secondary mt-1 text-center">
+                   @(editMode ? $"Editing the ad => '{Model.Name}'" : "Here you can create a new ad with the features that you want")
+                </p>
+
+                <div class="col-12 mx-auto card bg-dark text-white mt-5 mb-5" style="border-radius: 1rem;">
+                    <div class="card-body">
+
+                        @if(!editMode)
+                        {
+                            <h2 class="fw-bold mb-3 text-uppercase text-center mt-2">Creating a new ad</h2>
+                            <p class="text-white-50 fs-5 mb-3 text-center">Please fill in all the fields below!</p>
+                        }else
+                        {
+                            <div class="row mb-5 m-0 p-0">
+                                <div class="col-12 p-0 m-0 mx-auto">
+                                    <div id="carouselExampleIndicators" class="carousel carousel-dark slide m-0 p-0" data-bs-ride="true">
+                                        <div class="carousel-indicators m-0 p-0">
+                                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                                            @if (Model.ImagePathTwo != null)
+                                            {
+                                                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                                            }
+                                            @if (Model.ImagePathThree != null)
+                                            {
+                                                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                                            }
+                                            @if (Model.ImagePathFour != null)
+                                            {
+                                                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3" aria-label="Slide 4"></button>
+                                            }
+                                        </div>
+                                        <div class="carousel-inner m-0 p-0">
+                                            <div class="carousel-item active">
+                                                <img src="@Model.ImagePathOne" class="d-block w-100 detail img-custom-edit" alt="image">
+                                            </div>
+                                            @if (Model.ImagePathTwo != null)
+                                            {
+                                                <div class="carousel-item">
+                                                    <img src="@Model.ImagePathTwo" class="d-block w-100 detail img-custom-edit" alt="image">
+                                                </div>
+                                            }
+                                            @if (Model.ImagePathThree != null)
+                                            {
+                                                <div class="carousel-item">
+                                                    <img src="@Model.ImagePathThree" class="d-block w-100 detail img-custom-edit" alt="image">
+                                                </div>
+                                            }
+                                            @if (Model.ImagePathFour != null)
+                                            {
+                                                <div class="carousel-item">
+                                                    <img src="@Model.ImagePathFour" class="d-block w-100 detail img-custom-edit" alt="image">
+                                                </div>
+                                            }
+                                        </div>
+                                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                            <span class="visually-hidden">Previous</span>
+                                        </button>
+                                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                            <span class="visually-hidden">Next</span>
+                                        </button>
                                     </div>
-                                    @if (Model.ImagePathTwo != null)
-                                    {
-                                        <div class="carousel-item">
-                                            <img src="@Model.ImagePathTwo" class="d-block w-100 detail img-custom-edit" alt="image">
-                                        </div>
-                                    }
-                                    @if (Model.ImagePathThree != null)
-                                    {
-                                        <div class="carousel-item">
-                                            <img src="@Model.ImagePathThree" class="d-block w-100 detail img-custom-edit" alt="image">
-                                        </div>
-                                    }
-                                    @if (Model.ImagePathFour != null)
-                                    {
-                                        <div class="carousel-item">
-                                            <img src="@Model.ImagePathFour" class="d-block w-100 detail img-custom-edit" alt="image">
-                                        </div>
-                                    }
                                 </div>
-                                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                    <span class="visually-hidden">Previous</span>
-                                </button>
-                                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                    <span class="visually-hidden">Next</span>
-                                </button>
                             </div>
-                        </div>
+                        }
+
+                        <form method="post" asp-controller="AdminAds" runat="server" asp-action="@(editMode ? "Edit" : "Create")" EncType="multipart/form-data" class="needs-validation">
+
+                            <div class="p-3 pt-0">
+                                <label asp-for="Name" class="form-label text-white"><strong>Name <small class="text-danger"> *</small></strong></label>
+                                <input type="text" class="form-control bg-dark text-white border-white form-control-lg"
+                                   asp-for="Name">
+                                <span asp-validation-for="Name" class="text-danger"></span>
+                            </div>
+
+                            <div class="p-3 pt-0">
+                                <label asp-for="Price" class="form-label text-white"><strong>Price <small class="text-danger"> *</small></strong>
+
+    </label>
+                                <input type="number" class="form-control bg-dark text-white border-white form-control-lg" asp-for="Price">
+                                <span asp-validation-for="Price" class="text-danger"></span>
+                            </div>
+
+                            <div class="p-3 pt-0">
+                                <label asp-for="Description" class="form-label text-white"><strong>Description <small class="text-danger"> *</small></strong>
+
+    </label>
+                                <textarea type="text" class="form-control bg-dark text-white border-white form-control-lg" asp-for="Description" rows="4" name="Description"></textarea>
+                                <span asp-validation-for="Description" class="text-danger"></span>
+                            </div>
+
+                            <div class="p-3 pt-0">
+                                <label asp-for="CategoryId" class="form-label text-white"><strong>Category <small class="text-danger"> *</small></strong>
+
+    </label>
+                                <select class="form-select bg-dark text-white border-white form-control-lg" asp-for="CategoryId">
+
+                                    @foreach (var category in Model.CategoriesList)
+                                    {
+                                        <option value="@category.Id">@category.Name</option>
+                                    }
+                                </select>
+                                <span asp-validation-for="CategoryId" class="text-danger"></span>
+                            </div>
+
+                            <div class="p-3 pt-0">
+                                <label asp-for="ImagePathOne" class="form-label text-white"><strong>Upload Main Image <small class="text-danger"> *</small></strong>
+
+    </label>
+                                @if (editMode)
+                                {
+                                    <input class="form-control bg-dark text-white border-white form-control-lg" type="file" runat="server" asp-for="File1">
+                                }
+                                else
+                                {
+                                    <input class="form-control bg-dark text-white border-white form-control-lg" type="file" runat="server" asp-for="File1" required>
+                                }
+                                <span asp-validation-for="ImagePathOne" class="text-danger"></span>
+                            </div>
+
+                            <div class="p-3 pt-0">
+                                <label asp-for="ImagePathTwo" class="form-label text-white"><strong>Upload Secondaries Images</strong></label>
+                                <input class="form-control mb-2 bg-dark text-white border-white form-control-lg" type="file" runat="server" asp-for="File2">
+                                <input class="form-control mb-2 bg-dark text-white border-white form-control-lg" type="file" runat="server" asp-for="File3">
+                                <input class="form-control bg-dark text-white border-white form-control-lg" type="file" runat="server" asp-for="File4">
+                                <span asp-validation-for="ImagePathTwo" class="text-danger"></span>
+                            </div>
+
+                            <input type="hidden" asp-for="Id" />
+
+                            <button class="btn btn-primary btn-lg float-end" type="submit">@(
+                            editMode ? "Update" : "Create")
+                            </button>
+                            <a class="btn btn-light btn-lg float-end me-2" asp-controller="AdminAds" asp-action="Index">Back</a>
+                        </form>
                     </div>
-
-                    <div class="mb-3">
-                        <label asp-for="Name" class="form-label"><strong>Name</strong></label>
-                        <input type="text" class="form-control" asp-for="Name" name="Name" required>
-                        <span asp-validation-for="Name" class="text-danger"></span>
-                    </div>
-
-                    <div class="mb-3">
-                        <label asp-for="Price" class="form-label"><strong>Price</strong></label>
-                        <input type="number" class="form-control" asp-for="Price" name="Price" required>
-                        <span asp-validation-for="Price" class="text-danger"></span>
-                    </div>
-
-                    <div class="mb-3">
-                        <label asp-for="Description" class="form-label"><strong>Description</strong></label>
-                        <textarea type="text" class="form-control" asp-for="Description" rows="4" name="Description" required></textarea>
-                        <span asp-validation-for="Description" class="text-danger"></span>
-                    </div>
-
-                    <div class="mb-3">
-                        <label asp-for="CategoryId" class="form-label"><strong>Category</strong></label>
-                        <select class="form-select" asp-for="CategoryId" required>
-                            @foreach (var category in Model.CategoriesList)
-                            {
-                                <option value="@category.Id">@category.Name</option>
-                            }
-                        </select>
-                        <span asp-validation-for="CategoryId" class="text-danger"></span>
-                    </div>
-
-                    <div class="mb-3">
-                        <label asp-for="ImagePathOne" class="form-label"><strong>Upload Main Image</strong></label>
-                        @if (editMode) {<input class="form-control" type="file" runat="server" asp-for="File1">}
-                        else {<input class="form-control" type="file" runat="server" asp-for="File1" required>}
-                        <span asp-validation-for="ImagePathOne" class="text-danger"></span>
-                    </div>
-
-                    <div class="mb-3">
-                        <label asp-for="ImagePathTwo" class="form-label"><strong>Upload Secondaries Images</strong></label>
-                        <input class="form-control mb-2" type="file" runat="server" asp-for="File2">
-                        <input class="form-control mb-2" type="file" runat="server" asp-for="File3">
-                        <input class="form-control" type="file" runat="server" asp-for="File4">
-                        <span asp-validation-for="ImagePathTwo" class="text-danger"></span>
-                    </div>
-
-                    <input type="hidden" asp-for="Id" />
-
-                    <button type="submit" runat="server" class="btn btn-primary float-end mt-2 ms-2">@(
-                    editMode ? "Actualizar" : "Registrar"
-                    )</button>
-                    <a asp-controller="AdminAds" asp-action="Index" class="btn btn-dark float-end mt-2">Regresar</a>
                 </div>
             </div>
         </div>
-    </form>
+    </section>
 }

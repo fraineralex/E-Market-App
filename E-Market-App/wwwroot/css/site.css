@@ -25,6 +25,10 @@ body {
     height: 300px;
 }
 
+.img-carousel {
+    height: 800px;
+}
+
 .custom {
     display: inline-flex;
     padding-right: 10px;

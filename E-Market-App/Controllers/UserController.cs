@@ -1,8 +1,9 @@
 ﻿using EMarketApp.Core.Application.Interfaces.Services;
-using EMarketApp.Core.Application.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using EMarketApp.Core.Application.Helpers;
 using E_Market_App.Middlewares;
+using EMarketApp.Core.Application.ViewModels.Users;
+using EMarketApp.Core.Domain.Entities;
 
 namespace Pokedex_App.Controllers
 {
@@ -87,8 +88,19 @@ namespace Pokedex_App.Controllers
 
             }
 
-            await _userService.Add(saveUserViewModel);
-            return RedirectToRoute(new { controller = "User", action = "Index" });
+            Users user = await _userService.GetAUserByUsernameAsync(saveUserViewModel.Username);
+
+            if (user == null)
+            {
+                await _userService.Add(saveUserViewModel);
+                return RedirectToRoute(new { controller = "User", action = "Index" });
+            }
+            else
+            {
+                ModelState.AddModelError("userVaidation", "This user name is already occupied by another user!");
+                ViewBag.Page = "Sing up";
+                return View("Register", saveUserViewModel);
+            }
         }
 
         public IActionResult Logout()

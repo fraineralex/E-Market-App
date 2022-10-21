@@ -1,5 +1,5 @@
-﻿@using EMarketApp.Core.Application.ViewModels
-@model EMarketApp.Core.Application.ViewModels.DetailsAdViewModel
+﻿@using EMarketApp.Core.Application.ViewModels.Ads
+@model DetailsAdViewModel
 @{
     ViewData["Title"] = "Ad Details";
 }
@@ -7,12 +7,12 @@
 <section class="py-2 text-center container">
     <div class="row py-lg-3">
         <div class="col-lg-6 col-md-8 mx-auto">
-            <h1 class="fw-bold text-center"> Details</h1>
-            <p class="fs-3 fw-bold text-secondary mt-1 text-center">
+            <h1 class="fw-bold text-center"> Ad Details</h1>
+            <p class="fs-4 fw-bold text-secondary mt-1 text-center">
                 Here you can view in more detail all the information of the selected ad.
             </p>
         </div>
-     </div>
+    </div>
 </section>
 
 <div class="row mb-5">
@@ -26,24 +26,24 @@
             </div>
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <img src="@Model.ImagePathOne" class="d-block w-100 detail" alt="...">
+                    <img src="@Model.ImagePathOne" class="d-block w-100 detail img-carousel" alt="...">
                 </div>
                 @if (Model.ImagePathTwo != null)
                 {
                     <div class="carousel-item">
-                        <img src="@Model.ImagePathTwo" class="d-block w-100 detail" alt="...">
+                        <img src="@Model.ImagePathTwo" class="d-block w-100 detail img-carousel" alt="...">
                      </div>
                 }
                 @if (Model.ImagePathThree != null)
                 {
                     <div class="carousel-item">
-                        <img src="@Model.ImagePathThree" class="d-block w-100 detail" alt="...">
+                        <img src="@Model.ImagePathThree" class="d-block w-100 detail img-carousel" alt="...">
                     </div>
                 }
                 @if (Model.ImagePathFour != null)
                 {
                     <div class="carousel-item">
-                        <img src="@Model.ImagePathFour" class="d-block w-100 detail" alt="...">
+                        <img src="@Model.ImagePathFour" class="d-block w-100 detail img-carousel" alt="...">
                     </div>
                 }
             </div>

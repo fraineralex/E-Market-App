@@ -1,6 +1,7 @@
 ﻿using EMarketApp.Core.Application.Interfaces.Repositories;
 using EMarketApp.Core.Application.Interfaces.Services;
-using EMarketApp.Core.Application.ViewModels;
+using EMarketApp.Core.Application.ViewModels.Ads;
+using EMarketApp.Core.Application.ViewModels.Users;
 using EMarketApp.Core.Domain.Entities;
 
 namespace EMarketApp.Core.Application.Services
@@ -98,7 +99,7 @@ namespace EMarketApp.Core.Application.Services
         {
             Users user = await _userRepository.LoginAsync(loginVm);
 
-            if(user == null)
+            if (user == null)
             {
                 return null;
             }
@@ -114,5 +115,15 @@ namespace EMarketApp.Core.Application.Services
 
             return userVm;
         }
+
+        public async Task<Users> GetAUserByUsernameAsync(string username)
+        {
+            var userslist = await _userRepository.GetAllAsync();
+
+            var userfiltered = userslist.Where(user => user.Username == username).FirstOrDefault();
+
+            return userfiltered;
+        }
+
     }
 }

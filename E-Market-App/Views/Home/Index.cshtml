@@ -1,5 +1,5 @@
-﻿@using EMarketApp.Core.Application.ViewModels
-@model List<EMarketApp.Core.Application.ViewModels.AdViewModel>
+﻿@using EMarketApp.Core.Application.ViewModels.Ads
+@model List<AdViewModel>
 @{
     ViewData["Title"] = "Home";
 }
@@ -8,7 +8,7 @@
 {
     <form method="POST" asp-controller="Home" asp-action="Index" class="position-absolute py-5 mt-4 top-0 end-0 custom">
         <select class="mt-2 me-2" id="checkboxes-select" multiple name="CategoryId" placeholder="Filter by category"
-            data-search="false" data-silent-initial-value-set="true" aria-describedby="button">
+            data-search="false" data-silent-initial-value-set="true" aria-describedby="button" required>
             @foreach (var category in ViewBag.CategoriesList)
             {
                 <option value="@category.Id">@category.Name</option>
@@ -25,9 +25,8 @@
     <div class="row py-lg-3">
         <div class="col-lg-6 col-md-8 mx-auto">
             <h1 class="fw-bold text-center"> E Market App</h1>
-            <p class="fs-3 fw-bold text-secondary mt-1 text-center">
-                Here you will find all the ads created by all users in the system,
-                which you can filter by category or by their own name.
+            <p class="fs-4 fw-bold text-secondary mt-1 text-center">
+                Here you will find all the ads created by all users in the system and filter them by it's category or it's name
             </p>
         </div>
      </div>
@@ -37,8 +36,8 @@
 
     @if(Model == null || Model.Count == 0)
     {
-        <h1 class="text-center fw-light mb-3 mt-3">Oops :(</h1>
-        <h5 class="text-center lead text-muted">No ads created yet</h5>
+        <h1 class="fs-4 fw-bold mt-5 py-5 text-center">Oops :(</h1>
+        <h5 class="fs-4 fw-bold text-secondary mt-1 text-center">No ad has been found in the system</h5>
     }else
     {
         @foreach(AdViewModel ad in Model)

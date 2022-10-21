@@ -1,19 +1,18 @@
-﻿@using EMarketApp.Core.Application.ViewModels
-@model List<EMarketApp.Core.Application.ViewModels.AdViewModel>
+﻿@using EMarketApp.Core.Application.ViewModels.Ads
+@model List<AdViewModel>
 @{
     ViewData["Title"] = "Admin My Ads";
 }
 
-<section class="py-3 text-center container">
-    <div class="row py-lg-5">
+<section class="py-2 text-center container">
+    <div class="row py-lg-3">
         <div class="col-lg-6 col-md-8 mx-auto">
-            <h1 class="fw-bold">Ads Manager</h1>
-            <p class="lead text-muted">
-                Here you can view all your created ads, its categories and
-                you can create your own ads, edit or delete existing ones.
+            <h1 class="fw-bold text-center"> Ads Manager</h1>
+            <p class="fs-4 fw-bold text-secondary mt-1 text-center">
+                Here you will be able to manage all the ads registered in the system and create new ones.
             </p>
             <p>
-                <a asp-controller="AdminAds" asp-action="Create" class="btn btn-lg btn-primary my-2">Create Ad</a>
+                <a asp-controller="AdminAds" asp-action="Create" class="btn btn-lg btn-primary my-2">Create a new Ad</a>
             </p>
         </div>
     </div>
@@ -23,8 +22,8 @@
 
     @if (Model == null || Model.Count == 0)
     {
-        <h1 class="text-center fw-light mb-3 mt-3">Oops :(</h1>
-        <h5 class="text-center lead text-muted">No ad created yet</h5>
+        <h1 class="fs-4 fw-bold mt-5 py-5text-center">Oops :(</h1>
+        <h5 class="fs-4 fw-bold text-secondary mt-1 text-center">No ad has been found in the system</h5>
     }
     else
     {

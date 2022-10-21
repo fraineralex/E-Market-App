@@ -1,19 +1,18 @@
-﻿@using EMarketApp.Core.Application.ViewModels
-@model List<EMarketApp.Core.Application.ViewModels.CategoryViewModel>
+﻿@using EMarketApp.Core.Application.ViewModels.Categories
+@model List<CategoryViewModel>
 @{
     ViewData["Title"] = "Admin Categories";
 }
 
-<section class="py-3 text-center container">
-    <div class="row py-lg-5">
+<section class="py-2 text-center container">
+    <div class="row py-lg-3">
         <div class="col-lg-6 col-md-8 mx-auto">
-            <h1 class="fw-bold">Categories Manager</h1>
-            <p class="lead text-muted">
-                Here you will be able to see all the categories registered in the system,
-                the number of ads and associated users, among other things.
+            <h1 class="fw-bold text-center"> Categories Manager</h1>
+            <p class="fs-4 fw-bold text-secondary mt-1 text-center">
+                Here you will be able to manage all the categories registered in the system and create new ones.
             </p>
             <p>
-                <a asp-controller="AdminCategories" asp-action="Create" class="btn btn-lg btn-primary my-2">Create Category</a>
+                <a asp-controller="AdminCategories" asp-action="Create" class="btn btn-lg btn-primary my-2">Create category</a>
             </p>
         </div>
     </div>
@@ -23,8 +22,8 @@
 
     @if (Model == null || Model.Count == 0)
     {
-        <h1 class="text-center fw-light mb-3 mt-5">Oops :(</h1>
-        <h4 class="text-center fw-light text-muted mb-5 pb-5">No category created yet</h4>
+        <h1 class="fs-4 fw-bold mt-5 py-5 text-center">Oops :(</h1>
+        <h5 class="fs-4 fw-bold text-secondary mt-1 text-center">No categories has been found in the system</h5>
     }
     else
     {
@@ -33,8 +32,8 @@
             <div class="col-4 mb-4">
                 <div class="card bg-dark text-light">
                     <div class="card-body">
-                        <h5 class="card-title mb-2">@category.Name</h5>
-                        <p>@category.Description</p>
+                        <h5 class="card-title mb-3 text-center text-uppercase fw-bold">@category.Name</h5>
+                        <p class="text-center">@category.Description</p>
                         <p><i class="fw-bold mb-0 me-2">Associated ads: </i> @category.AdsQuantity ads</p>
                         <p><i class="fw-bold mt-0 me-2">Associated users: </i> @category.UsersQuantity users</p>
                         <a asp-controller="AdminCategories" asp-action="Delete" asp-route-id="@category.Id" class="btn btn-danger float-end">

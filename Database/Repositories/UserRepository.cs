@@ -1,6 +1,6 @@
 ﻿using EMarketApp.Core.Application.Helpers;
 using EMarketApp.Core.Application.Interfaces.Repositories;
-using EMarketApp.Core.Application.ViewModels;
+using EMarketApp.Core.Application.ViewModels.Users;
 using EMarketApp.Core.Domain.Entities;
 using EMarketApp.Infrastructure.Persistence.Context;
 using Microsoft.EntityFrameworkCore;

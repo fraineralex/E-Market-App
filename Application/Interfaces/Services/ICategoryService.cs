@@ -1,4 +1,4 @@
-﻿using EMarketApp.Core.Application.ViewModels;
+﻿using EMarketApp.Core.Application.ViewModels.Categories;
 
 namespace EMarketApp.Core.Application.Interfaces.Services
 {

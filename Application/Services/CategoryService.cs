@@ -1,6 +1,6 @@
 ﻿using EMarketApp.Core.Application.Interfaces.Repositories;
 using EMarketApp.Core.Application.Interfaces.Services;
-using EMarketApp.Core.Application.ViewModels;
+using EMarketApp.Core.Application.ViewModels.Categories;
 using EMarketApp.Core.Domain.Entities;
 using System;
 

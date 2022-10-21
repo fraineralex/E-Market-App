@@ -1,6 +1,6 @@
 ﻿using E_Market_App.Middlewares;
 using EMarketApp.Core.Application.Interfaces.Services;
-using EMarketApp.Core.Application.ViewModels;
+using EMarketApp.Core.Application.ViewModels.Categories;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Pokedex_App.Controllers

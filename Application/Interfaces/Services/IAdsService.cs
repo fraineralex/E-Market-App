@@ -1,4 +1,4 @@
-﻿using EMarketApp.Core.Application.ViewModels;
+﻿using EMarketApp.Core.Application.ViewModels.Ads;
 
 namespace EMarketApp.Core.Application.Interfaces.Services
 {
