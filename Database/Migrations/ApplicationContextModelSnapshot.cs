@@ -165,6 +165,9 @@ namespace EMarketApp.Infrastructure.Persistence.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("Username")
+                        .IsUnique();
+
                     b.ToTable("Users", (string)null);
                 });
 

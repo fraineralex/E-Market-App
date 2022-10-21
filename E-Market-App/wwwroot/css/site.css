@@ -21,6 +21,10 @@ body {
     height: 200px;
 }
 
+.img-custom-edit {
+    height: 300px;
+}
+
 .custom {
     display: inline-flex;
     padding-right: 10px;

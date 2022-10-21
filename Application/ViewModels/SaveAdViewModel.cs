@@ -25,10 +25,10 @@ namespace EMarketApp.Core.Application.ViewModels
 
         public List<CategoryViewModel>? CategoriesList { get; set; }
 
-        public IFormFile File1 { get; set; }
-        public IFormFile File2 { get; set; }
-        public IFormFile File3 { get; set; }
-        public IFormFile File4 { get; set; }
+        public IFormFile? File1 { get; set; }
+        public IFormFile? File2 { get; set; }
+        public IFormFile? File3 { get; set; }
+        public IFormFile? File4 { get; set; }
 
     }
 

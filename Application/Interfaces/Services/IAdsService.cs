@@ -6,5 +6,6 @@ namespace EMarketApp.Core.Application.Interfaces.Services
     {
         Task<List<AdViewModel>> GetAllViewModelWithFilters(FilterViewModel vm);
         Task<DetailsAdViewModel> GetAdDetailsByIdAsync(int id);
+        List<AdViewModel> FilterAdsByCategory(List<AdViewModel> adViewModelList, string categoryId);
     }
 }

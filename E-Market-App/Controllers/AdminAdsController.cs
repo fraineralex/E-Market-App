@@ -99,7 +99,14 @@ namespace Pokedex_App.Controllers
                 return View("SaveAd", vm);
             }
 
+            SaveAdViewModel adVm = await _adService.GetSaveViewModelById(vm.Id);
+            vm.ImagePathOne = UploadFile(vm.File1, vm.Id, true, adVm.ImagePathOne);
+            vm.ImagePathTwo = UploadFile(vm.File2, vm.Id, true, adVm.ImagePathTwo);
+            vm.ImagePathThree = UploadFile(vm.File3, vm.Id, true, adVm.ImagePathThree);
+            vm.ImagePathFour = UploadFile(vm.File4, vm.Id, true, adVm.ImagePathFour);
+
             await _adService.Update(vm);
+
             return RedirectToRoute(new { controller = "adminAds", action = "Index" });
         }
 
@@ -123,33 +130,84 @@ namespace Pokedex_App.Controllers
             }
 
             await _adService.Delete(id);
-            return RedirectToRoute(new { controller = "adminAds", action = "Index" });
-        }
 
-        private string UploadFile(IFormFile file, int id)
-        {
             //get directory path
             string basePath = $"/Images/Ads/{id}";
             string path = Path.Combine(Directory.GetCurrentDirectory(), $"wwwroot{basePath}");
 
-            //create folder if not exist
-            if (!Directory.Exists(path))
+            if (Directory.Exists(path))
             {
-                Directory.CreateDirectory(path);
+                DirectoryInfo directoryInfo = new DirectoryInfo(path);
+                foreach(FileInfo file in directoryInfo.GetFiles())
+                {
+                    file.Delete();
+                }
+
+                foreach (DirectoryInfo folder in directoryInfo.GetDirectories())
+                {
+                    folder.Delete(true);
+                }
+
+                Directory.Delete(path);
             }
 
-            //get file path
-            Guid guid = Guid.NewGuid();
-            FileInfo fileInfo = new(file.FileName);
-            string fileName = fileInfo.Name + fileInfo.Extension;
-            string fileNameWhitPath = Path.Combine(path, fileName);
-
-            using (var stream = new FileStream(fileNameWhitPath, FileMode.Create))
+            return RedirectToRoute(new { controller = "adminAds", action = "Index" });
+        }
+        
+        private string UploadFile(IFormFile file, int id, bool isEditMode = false, string imageURL = "")
+        {
+            if (file != null)
             {
-                file.CopyTo(stream);
-            }
 
-            return $"{basePath}/{fileName}";
+                if (isEditMode && file == null)
+                {
+                    return imageURL;
+                }
+
+                //get directory path
+                string basePath = $"/Images/Ads/{id}";
+                string path = Path.Combine(Directory.GetCurrentDirectory(), $"wwwroot{basePath}");
+
+                //create folder if not exist
+                if (!Directory.Exists(path))
+                {
+                    Directory.CreateDirectory(path);
+                }
+
+                //get file path
+                Guid guid = Guid.NewGuid();
+                FileInfo fileInfo = new(file.FileName);
+                string fileName = fileInfo.Name + fileInfo.Extension;
+                string fileNameWhitPath = Path.Combine(path, fileName);
+
+                using (var stream = new FileStream(fileNameWhitPath, FileMode.Create))
+                {
+                    file.CopyTo(stream);
+                }
+
+                if (isEditMode)
+                {
+                    string[] oldImagePath = imageURL.Split("/");
+                    string oldImageName = oldImagePath[^1];
+                    string completeImageOldPath = Path.Combine(path, oldImageName);
+
+                    if (System.IO.File.Exists(completeImageOldPath))
+                    {
+                        System.IO.File.Delete(completeImageOldPath);
+                    }
+                }
+
+                return $"{basePath}/{fileName}";
+            }
+            else
+            {
+                if (isEditMode && file == null)
+                {
+                    return imageURL;
+                }
+
+                return null;
+            }
         }
     }
 }

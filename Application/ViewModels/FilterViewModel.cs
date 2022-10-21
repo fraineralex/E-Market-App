@@ -9,6 +9,6 @@ namespace EMarketApp.Core.Application.ViewModels
     public class FilterViewModel
     {
         public String? AdName { get; set; }
-        public List<int> CategoryId { get; set; }
+        public string CategoryId { get; set; }
     }
 }

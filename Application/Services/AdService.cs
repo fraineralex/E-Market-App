@@ -132,10 +132,7 @@ namespace EMarketApp.Core.Application.Services
 
             if (vm.CategoryId != null)
             {
-                Console.WriteLine(vm.CategoryId);
-                adViewModelList = adViewModelList
-                    .Where(ad => ad.CategoryId == 1)
-                    .ToList();
+                return FilterAdsByCategory(adViewModelList, vm.CategoryId);
             }
 
             if (!String.IsNullOrEmpty(vm.AdName))
@@ -169,6 +166,28 @@ namespace EMarketApp.Core.Application.Services
 
 
             }).First();
+
+            return adViewModelList;
+        }
+
+        public List<AdViewModel> FilterAdsByCategory(List<AdViewModel> adViewModelList, string categoryId)
+        {
+            string[] categories = categoryId.Split(",");
+            int[] categoriesIds = new int[categories.Length];
+            for (int i = 0; i < categories.Length; i++)
+            {
+                categoriesIds[i] = Convert.ToInt32(categories[i]);
+            }
+
+            switch (categoriesIds.Length)
+            {
+                case 1: adViewModelList = adViewModelList.Where(ad => ad.CategoryId == categoriesIds[0]) .ToList(); break;
+                case 2: adViewModelList = adViewModelList.Where(ad => ad.CategoryId == categoriesIds[0] || ad.CategoryId == categoriesIds[1]).ToList(); break;
+                case 3:adViewModelList = adViewModelList.Where(ad => ad.CategoryId == categoriesIds[0] || ad.CategoryId == categoriesIds[1] || ad.CategoryId == categoriesIds[2]).ToList(); break;
+                case 4: adViewModelList = adViewModelList.Where(ad => ad.CategoryId == categoriesIds[0] || ad.CategoryId == categoriesIds[1] || ad.CategoryId == categoriesIds[2] || ad.CategoryId == categoriesIds[3]).ToList(); break;
+                case 5: adViewModelList = adViewModelList.Where(ad => ad.CategoryId == categoriesIds[0] || ad.CategoryId == categoriesIds[1] || ad.CategoryId == categoriesIds[2] || ad.CategoryId == categoriesIds[3] || ad.CategoryId == categoriesIds[3]).ToList(); break;
+                default: adViewModelList = adViewModelList.Where(ad => ad.CategoryId == categoriesIds[0] || ad.CategoryId == categoriesIds[1] || ad.CategoryId == categoriesIds[2] || ad.CategoryId == categoriesIds[3] || ad.CategoryId == categoriesIds[3] || ad.CategoryId == categoriesIds[^1]).ToList(); break;
+            }
 
             return adViewModelList;
         }
